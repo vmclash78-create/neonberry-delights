@@ -1,6 +1,7 @@
 import { useStore } from '@/contexts/StoreContext';
 import { Search, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface HeaderProps {
   searchQuery: string;
@@ -33,6 +34,7 @@ export default function Header({ searchQuery, onSearchChange }: HeaderProps) {
               </div>
             </div>
           </div>
+          <ThemeToggle />
         </div>
 
         <div className="relative">
