@@ -21,7 +21,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState('');
 
-  // Reset when product changes
   useMemo(() => {
     if (product) {
       setSelectedSize(product.sizes[0] || null);
@@ -92,8 +91,12 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
             className="bg-card w-full max-w-lg max-h-[90vh] rounded-t-3xl md:rounded-3xl overflow-hidden flex flex-col"
           >
             {/* Header */}
-            <div className="relative h-40 bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center">
-              <span className="text-7xl">🍇</span>
+            <div className="relative h-40 bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center overflow-hidden">
+              {product.image_url ? (
+                <img src={product.image_url} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
+              ) : (
+                <span className="text-7xl">🍫</span>
+              )}
               <button onClick={onClose} className="absolute top-3 right-3 p-2 rounded-full bg-card/80 backdrop-blur-sm hover:bg-card transition-colors">
                 <X className="w-5 h-5 text-foreground" />
               </button>
@@ -116,11 +119,11 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                       onClick={() => setSelectedSize(size)}
                       className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                         selectedSize?.name === size.name
-                          ? 'gradient-neon text-primary-foreground neon-glow'
+                          ? 'gradient-chocolate text-primary-foreground warm-glow'
                           : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                       }`}
                     >
-                      {size.name} ({size.ml}ml) — R$ {size.price.toFixed(2)}
+                      {size.name} ({size.weight}g) — R$ {size.price.toFixed(2)}
                     </button>
                   ))}
                 </div>
@@ -129,7 +132,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
               {/* Toppings */}
               {toppings && toppings.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-2">Toppings</h3>
+                  <h3 className="text-sm font-semibold text-foreground mb-2">Coberturas</h3>
                   <div className="grid grid-cols-2 gap-2">
                     {toppings.map(topping => {
                       const isSelected = selectedToppings.some(t => t.id === topping.id);
@@ -185,7 +188,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 <textarea
                   value={notes}
                   onChange={e => setNotes(e.target.value)}
-                  placeholder="Ex: sem leite condensado..."
+                  placeholder="Ex: sem cobertura, embalagem para presente..."
                   className="w-full px-3 py-2 rounded-xl bg-secondary/60 border border-border/50 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none h-20"
                 />
               </div>
@@ -206,7 +209,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   onClick={handleAdd}
-                  className="flex-1 gradient-neon text-primary-foreground font-semibold py-3 rounded-xl text-sm flex items-center justify-center gap-2 neon-glow"
+                  className="flex-1 gradient-chocolate text-primary-foreground font-semibold py-3 rounded-xl text-sm flex items-center justify-center gap-2 warm-glow"
                 >
                   <ShoppingCart className="w-4 h-4" />
                   Adicionar — R$ {totalPrice.toFixed(2)}

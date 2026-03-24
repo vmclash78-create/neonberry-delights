@@ -21,11 +21,11 @@ export default function AdminSidebar({ active, onNavigate, onLogout }: AdminSide
   return (
     <aside className="w-64 h-screen glass-strong border-r border-border/50 flex flex-col p-4 fixed left-0 top-0 z-40">
       <div className="flex items-center gap-3 mb-8 px-2">
-        <div className="w-9 h-9 gradient-neon rounded-xl flex items-center justify-center text-sm font-bold text-primary-foreground">
-          N
+        <div className="w-9 h-9 gradient-chocolate rounded-xl flex items-center justify-center text-sm font-bold text-primary-foreground">
+          B
         </div>
         <div>
-          <h2 className="text-sm font-bold text-foreground">NeonBerry</h2>
+          <h2 className="text-sm font-bold text-foreground">Brownie & Co.</h2>
           <p className="text-[10px] text-muted-foreground">Painel Admin</p>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default function AdminSidebar({ active, onNavigate, onLogout }: AdminSide
               {isActive && (
                 <motion.div
                   layoutId="admin-sidebar-indicator"
-                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 gradient-neon rounded-r-full"
+                  className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 gradient-chocolate rounded-r-full"
                 />
               )}
               <item.icon className="w-4 h-4" />

@@ -27,16 +27,20 @@ function ProductCard({ product, onClick, index }: ProductCardProps) {
             <Star className="w-3 h-3 fill-current" /> Destaque
           </span>
         )}
-        <div className="absolute inset-0 flex items-center justify-center text-5xl opacity-60 group-hover:scale-110 transition-transform duration-500">
-          🍇
-        </div>
+        {product.image_url ? (
+          <img src={product.image_url} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center text-5xl opacity-60 group-hover:scale-110 transition-transform duration-500">
+            🍫
+          </div>
+        )}
       </div>
       <div className="p-3">
         <h3 className="font-semibold text-sm text-foreground leading-tight mb-1 overflow-wrap-break-word">{product.name}</h3>
         <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{product.description}</p>
         <div className="flex items-end justify-between">
           <span className="text-xs text-muted-foreground">a partir de</span>
-          <span className="text-base font-bold text-gradient-neon tabular-nums">
+          <span className="text-base font-bold text-gradient-chocolate tabular-nums">
             R$ {minPrice.toFixed(2)}
           </span>
         </div>

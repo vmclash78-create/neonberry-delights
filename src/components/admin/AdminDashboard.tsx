@@ -3,23 +3,23 @@ import { DollarSign, ShoppingBag, TrendingUp, Users } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from 'recharts';
 
 const stats = [
-  { label: 'Vendas Hoje', value: 'R$ 1.847,50', change: '+12%', icon: DollarSign, color: 'text-green-500' },
-  { label: 'Pedidos', value: '47', change: '+8%', icon: ShoppingBag, color: 'text-primary' },
-  { label: 'Ticket Médio', value: 'R$ 39,31', change: '+3%', icon: TrendingUp, color: 'text-accent' },
-  { label: 'Clientes', value: '34', change: '+15%', icon: Users, color: 'text-amber-500' },
+  { label: 'Vendas Hoje', value: 'R$ 2.340,00', change: '+14%', icon: DollarSign, color: 'text-green-500' },
+  { label: 'Pedidos', value: '58', change: '+10%', icon: ShoppingBag, color: 'text-primary' },
+  { label: 'Ticket Médio', value: 'R$ 40,34', change: '+5%', icon: TrendingUp, color: 'text-accent' },
+  { label: 'Clientes', value: '42', change: '+18%', icon: Users, color: 'text-amber-600' },
 ];
 
 const weeklyData = [
-  { day: 'Seg', vendas: 1200 }, { day: 'Ter', vendas: 1800 }, { day: 'Qua', vendas: 1400 },
-  { day: 'Qui', vendas: 2200 }, { day: 'Sex', vendas: 2800 }, { day: 'Sáb', vendas: 3200 }, { day: 'Dom', vendas: 2600 },
+  { day: 'Seg', vendas: 1500 }, { day: 'Ter', vendas: 2100 }, { day: 'Qua', vendas: 1800 },
+  { day: 'Qui', vendas: 2500 }, { day: 'Sex', vendas: 3100 }, { day: 'Sáb', vendas: 3800 }, { day: 'Dom', vendas: 3000 },
 ];
 
 const topProducts = [
-  { name: 'NeonBerry Special', qty: 23, revenue: 828 },
-  { name: 'Açaí Puro G', qty: 19, revenue: 532 },
-  { name: 'Berry Explosion', qty: 14, revenue: 532 },
-  { name: 'Combo Casal', qty: 11, revenue: 438.90 },
-  { name: 'Smoothie Energético', qty: 9, revenue: 252 },
+  { name: 'Brownie Nutella', qty: 28, revenue: 784 },
+  { name: 'Brownie Tradicional', qty: 24, revenue: 576 },
+  { name: 'Brownie Pistache', qty: 18, revenue: 612 },
+  { name: 'Combo Degustação', qty: 14, revenue: 558.60 },
+  { name: 'Brownie Brigadeiro', qty: 12, revenue: 288 },
 ];
 
 export default function AdminDashboard() {
@@ -27,7 +27,6 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, i) => (
           <motion.div
@@ -47,7 +46,6 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      {/* Charts */}
       <div className="grid lg:grid-cols-2 gap-4">
         <div className="glass rounded-2xl p-5">
           <h3 className="text-sm font-semibold text-foreground mb-4">Vendas da Semana</h3>
@@ -55,14 +53,7 @@ export default function AdminDashboard() {
             <BarChart data={weeklyData}>
               <XAxis dataKey="day" tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
               <YAxis tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
-              <Tooltip
-                contentStyle={{
-                  background: 'hsl(var(--card))',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: '12px',
-                  fontSize: '12px',
-                }}
-              />
+              <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: '12px', fontSize: '12px' }} />
               <Bar dataKey="vendas" fill="hsl(var(--primary))" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -74,21 +65,13 @@ export default function AdminDashboard() {
             <LineChart data={weeklyData}>
               <XAxis dataKey="day" tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
               <YAxis tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
-              <Tooltip
-                contentStyle={{
-                  background: 'hsl(var(--card))',
-                  border: '1px solid hsl(var(--border))',
-                  borderRadius: '12px',
-                  fontSize: '12px',
-                }}
-              />
+              <Tooltip contentStyle={{ background: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: '12px', fontSize: '12px' }} />
               <Line type="monotone" dataKey="vendas" stroke="hsl(var(--accent))" strokeWidth={2} dot={{ fill: 'hsl(var(--accent))' }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
       </div>
 
-      {/* Top Products */}
       <div className="glass rounded-2xl p-5">
         <h3 className="text-sm font-semibold text-foreground mb-4">Top Produtos</h3>
         <div className="space-y-3">

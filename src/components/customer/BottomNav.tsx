@@ -36,7 +36,7 @@ export default function BottomNav({ active, onNavigate }: BottomNavProps) {
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1.5 -right-2 w-4 h-4 gradient-neon rounded-full text-[10px] font-bold text-primary-foreground flex items-center justify-center"
+                    className="absolute -top-1.5 -right-2 w-4 h-4 gradient-chocolate rounded-full text-[10px] font-bold text-primary-foreground flex items-center justify-center"
                   >
                     {totalItems}
                   </motion.span>
@@ -48,7 +48,7 @@ export default function BottomNav({ active, onNavigate }: BottomNavProps) {
               {isActive && (
                 <motion.div
                   layoutId="bottomnav-indicator"
-                  className="absolute -top-0.5 w-8 h-0.5 gradient-neon rounded-full"
+                  className="absolute -top-0.5 w-8 h-0.5 gradient-chocolate rounded-full"
                 />
               )}
             </button>
