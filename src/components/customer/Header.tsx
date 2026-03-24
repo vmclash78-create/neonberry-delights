@@ -22,7 +22,7 @@ export default function Header({ searchQuery, onSearchChange }: HeaderProps) {
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl gradient-neon flex items-center justify-center text-lg font-bold text-primary-foreground">
-              N
+              B
             </div>
             <div>
               <h1 className="text-lg font-bold tracking-tight text-foreground">{settings.name}</h1>
@@ -41,7 +41,7 @@ export default function Header({ searchQuery, onSearchChange }: HeaderProps) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Buscar açaí, smoothie..."
+            placeholder="Buscar brownie..."
             value={searchQuery}
             onChange={e => onSearchChange(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-secondary/60 border border-border/50 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 transition-shadow"

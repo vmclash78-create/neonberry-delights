@@ -8,7 +8,7 @@ export interface Category {
 
 export interface ProductSize {
   name: string;
-  ml: number;
+  grams: number;
   price: number;
 }
 

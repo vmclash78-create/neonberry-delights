@@ -120,7 +120,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                           : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                       }`}
                     >
-                      {size.name} ({size.ml}ml) — R$ {size.price.toFixed(2)}
+                      {size.name} ({size.grams}g) — R$ {size.price.toFixed(2)}
                     </button>
                   ))}
                 </div>

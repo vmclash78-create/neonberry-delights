@@ -11,7 +11,7 @@ interface BottomNavProps {
 
 const tabs = [
   { id: 'home' as Tab, icon: Home, label: 'Início' },
-  { id: 'menu' as Tab, icon: UtensilsCrossed, label: 'Cardápio' },
+  { id: 'menu' as Tab, icon: UtensilsCrossed, label: 'Produtos' },
   { id: 'cart' as Tab, icon: ShoppingCart, label: 'Carrinho' },
   { id: 'favorites' as Tab, icon: Heart, label: 'Favoritos' },
 ];

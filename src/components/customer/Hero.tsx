@@ -17,7 +17,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
       className="relative overflow-hidden mx-4 mt-4 rounded-2xl"
     >
       <div className="relative z-10 gradient-neon px-6 py-10 md:py-16">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(180_90%_55%/0.2),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(35_80%_50%/0.25),transparent_50%)]" />
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             {settings.name}
           </h2>
           <p className="text-white/75 text-sm md:text-base max-w-md mb-6">
-            O melhor açaí da cidade, feito com ingredientes selecionados. Peça agora e receba em minutos.
+            Os melhores brownies artesanais da cidade, feitos com ingredientes premium. Peça agora e receba em casa.
           </p>
           <motion.button
             whileHover={{ scale: 1.03 }}

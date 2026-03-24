@@ -73,7 +73,7 @@ export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProp
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-semibold text-foreground truncate">{item.product.name}</h4>
                           <p className="text-[11px] text-muted-foreground">
-                            {item.selectedSize.name} ({item.selectedSize.ml}ml)
+                            {item.selectedSize.name} ({item.selectedSize.grams}g)
                             {item.toppings.length > 0 && ` • ${item.toppings.map(t => t.name).join(', ')}`}
                           </p>
                           <div className="flex items-center justify-between mt-2">
