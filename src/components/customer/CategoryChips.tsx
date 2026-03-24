@@ -1,6 +1,14 @@
 import { motion } from 'framer-motion';
 import { Category } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Cookie, Crown, CakeSlice, Gift, type LucideIcon } from 'lucide-react';
+
+const iconMap: Record<string, LucideIcon> = {
+  'cookie': Cookie,
+  'crown': Crown,
+  'cake-slice': CakeSlice,
+  'gift': Gift,
+};
 
 interface CategoryChipsProps {
   categories: Category[];
@@ -33,23 +41,28 @@ export default function CategoryChips({ categories, selectedId, onSelect, isLoad
       >
         Todos
       </motion.button>
-      {categories.map((cat, i) => (
-        <motion.button
-          key={cat.id}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.05, duration: 0.4 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => onSelect(cat.id)}
-          className={`flex-shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
-            selectedId === cat.id
-              ? 'gradient-neon text-primary-foreground neon-glow'
-              : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
-          }`}
-        >
-          {cat.icon} {cat.name}
-        </motion.button>
-      ))}
+      {categories.map((cat, i) => {
+        const IconComponent = iconMap[cat.icon];
+        return (
+          <motion.button
+            key={cat.id}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05, duration: 0.4 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => onSelect(cat.id)}
+            className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
+              selectedId === cat.id
+                ? 'gradient-neon text-primary-foreground neon-glow'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+            }`}
+          >
+            {IconComponent && <IconComponent className="w-4 h-4" />}
+            {cat.name}
+          </motion.button>
+        );
+      })}
     </div>
   );
 }
+

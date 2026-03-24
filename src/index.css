@@ -22,8 +22,8 @@
     --muted: 30 15% 92%;
     --muted-foreground: 20 10% 45%;
 
-    --accent: 35 80% 50%;
-    --accent-foreground: 20 25% 8%;
+    --accent: 30 65% 48%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
@@ -44,7 +44,7 @@
     --sidebar-ring: 25 76% 31%;
 
     --brownie-glow: 25 76% 31%;
-    --caramel-glow: 35 80% 50%;
+    --caramel-glow: 30 65% 48%;
   }
 
   .dark {
@@ -66,7 +66,7 @@
     --muted: 20 15% 16%;
     --muted-foreground: 30 10% 55%;
 
-    --accent: 35 75% 50%;
+    --accent: 30 55% 45%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;

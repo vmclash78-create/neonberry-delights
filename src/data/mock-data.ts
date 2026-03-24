@@ -1,10 +1,10 @@
 import { Category, Product, Topping, Complement, Neighborhood, StoreSettings, Coupon } from '@/types';
 
 export const mockCategories: Category[] = [
-  { id: '1', name: 'Brownies Clássicos', icon: '🍫', sort_order: 1, active: true },
-  { id: '2', name: 'Brownies Premium', icon: '✨', sort_order: 2, active: true },
-  { id: '3', name: 'Mini Brownies', icon: '🧁', sort_order: 3, active: true },
-  { id: '4', name: 'Combos', icon: '🎁', sort_order: 4, active: true },
+  { id: '1', name: 'Brownies Clássicos', icon: 'cookie', sort_order: 1, active: true },
+  { id: '2', name: 'Brownies Premium', icon: 'crown', sort_order: 2, active: true },
+  { id: '3', name: 'Mini Brownies', icon: 'cake-slice', sort_order: 3, active: true },
+  { id: '4', name: 'Combos', icon: 'gift', sort_order: 4, active: true },
 ];
 
 export const mockProducts: Product[] = [
@@ -119,8 +119,8 @@ export const mockStoreSettings: StoreSettings = {
   closing_time: '21:00',
   logo_url: '',
   banner_image: '',
-  primary_color: 'hsl(25, 65%, 32%)',
-  accent_color: 'hsl(35, 80%, 50%)',
+  primary_color: 'hsl(25, 76%, 31%)',
+  accent_color: 'hsl(30, 65%, 48%)',
   secondary_color: 'hsl(30, 20%, 90%)',
   instagram: '@browniedelicias',
   facebook: 'browniedelicias',

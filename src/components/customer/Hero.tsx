@@ -17,7 +17,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
       className="relative overflow-hidden mx-4 mt-4 rounded-2xl"
     >
       <div className="relative z-10 gradient-neon px-6 py-10 md:py-16">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(35_80%_50%/0.25),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,hsl(30_65%_48%/0.25),transparent_50%)]" />
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
