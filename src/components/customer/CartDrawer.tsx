@@ -53,7 +53,7 @@ export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProp
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <ShoppingBag className="w-12 h-12 text-muted-foreground/40 mb-3" />
                   <p className="text-sm text-muted-foreground">Seu carrinho está vazio</p>
-                  <p className="text-xs text-muted-foreground/60 mt-1">Adicione itens do cardápio</p>
+                  <p className="text-xs text-muted-foreground/60 mt-1">Adicione brownies do cardápio</p>
                 </div>
               ) : (
                 <AnimatePresence>
@@ -67,13 +67,17 @@ export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProp
                       className="glass rounded-xl p-3"
                     >
                       <div className="flex gap-3">
-                        <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-2xl flex-shrink-0">
-                          🍇
+                        <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center overflow-hidden flex-shrink-0">
+                          {item.product.image_url ? (
+                            <img src={item.product.image_url} alt={item.product.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <span className="text-2xl">🍫</span>
+                          )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-semibold text-foreground truncate">{item.product.name}</h4>
                           <p className="text-[11px] text-muted-foreground">
-                            {item.selectedSize.name} ({item.selectedSize.ml}ml)
+                            {item.selectedSize.name} ({item.selectedSize.weight}g)
                             {item.toppings.length > 0 && ` • ${item.toppings.map(t => t.name).join(', ')}`}
                           </p>
                           <div className="flex items-center justify-between mt-2">
@@ -86,7 +90,7 @@ export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProp
                                 <Plus className="w-3.5 h-3.5" />
                               </button>
                             </div>
-                            <span className="text-sm font-bold text-gradient-neon tabular-nums">
+                            <span className="text-sm font-bold text-gradient-chocolate tabular-nums">
                               R$ {item.totalPrice.toFixed(2)}
                             </span>
                           </div>
@@ -111,7 +115,7 @@ export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProp
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   onClick={() => { onClose(); onCheckout(); }}
-                  className="w-full gradient-neon text-primary-foreground font-semibold py-3 rounded-xl text-sm neon-glow"
+                  className="w-full gradient-chocolate text-primary-foreground font-semibold py-3 rounded-xl text-sm warm-glow"
                 >
                   Finalizar Pedido
                 </motion.button>

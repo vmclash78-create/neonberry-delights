@@ -19,9 +19,8 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
       return;
     }
     setLoading(true);
-    // Mock login — will be replaced with Supabase Auth
     setTimeout(() => {
-      if (email === 'admin@neonberry.com' && password === 'admin123') {
+      if (email === 'admin@brownieandco.com' && password === 'admin123') {
         toast.success('Login realizado!');
         onLogin();
       } else {
@@ -39,10 +38,10 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
         className="glass rounded-2xl p-8 w-full max-w-sm space-y-6"
       >
         <div className="text-center">
-          <div className="w-14 h-14 gradient-neon rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-14 h-14 gradient-chocolate rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Lock className="w-7 h-7 text-primary-foreground" />
           </div>
-          <h1 className="text-xl font-bold text-foreground">Admin NeonBerry</h1>
+          <h1 className="text-xl font-bold text-foreground">Admin Brownie & Co.</h1>
           <p className="text-sm text-muted-foreground mt-1">Acesse o painel administrativo</p>
         </div>
 
@@ -65,14 +64,14 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             whileTap={{ scale: 0.97 }}
             type="submit"
             disabled={loading}
-            className="w-full gradient-neon text-primary-foreground font-semibold py-3 rounded-xl text-sm neon-glow disabled:opacity-50"
+            className="w-full gradient-chocolate text-primary-foreground font-semibold py-3 rounded-xl text-sm warm-glow disabled:opacity-50"
           >
             {loading ? 'Entrando...' : 'Entrar'}
           </motion.button>
         </form>
 
         <p className="text-[11px] text-muted-foreground text-center">
-          Demo: admin@neonberry.com / admin123
+          Demo: admin@brownieandco.com / admin123
         </p>
       </motion.div>
     </div>

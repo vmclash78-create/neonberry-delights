@@ -44,13 +44,17 @@ export default function FeaturedCarousel({ products, isLoading, onProductClick }
             onClick={() => onProductClick(product)}
             className="flex-shrink-0 w-60 glass rounded-2xl overflow-hidden cursor-pointer group hover:shadow-lg hover:shadow-primary/10 transition-shadow"
           >
-            <div className="h-24 bg-gradient-to-br from-primary/30 to-accent/20 relative flex items-center justify-center">
-              <span className="text-4xl group-hover:scale-110 transition-transform duration-500">🍇</span>
+            <div className="h-24 bg-gradient-to-br from-primary/30 to-accent/20 relative flex items-center justify-center overflow-hidden">
+              {product.image_url ? (
+                <img src={product.image_url} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              ) : (
+                <span className="text-4xl group-hover:scale-110 transition-transform duration-500">🍫</span>
+              )}
             </div>
             <div className="p-3">
               <h3 className="font-semibold text-sm text-foreground mb-0.5">{product.name}</h3>
               <p className="text-xs text-muted-foreground line-clamp-1 mb-1">{product.description}</p>
-              <span className="text-sm font-bold text-gradient-neon tabular-nums">
+              <span className="text-sm font-bold text-gradient-chocolate tabular-nums">
                 R$ {Math.min(...product.sizes.map(s => s.price)).toFixed(2)}
               </span>
             </div>

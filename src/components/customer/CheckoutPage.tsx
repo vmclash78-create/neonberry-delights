@@ -68,7 +68,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
     ).join('\n');
 
     const msg = encodeURIComponent(
-      `🍇 *Pedido NeonBerry Açaí*\n\n` +
+      `🍫 *Pedido Brownie & Co.*\n\n` +
       `👤 *Cliente:* ${name.trim()}\n📱 ${phone}\n📍 ${address.trim()} — ${selectedNeighborhood.name}\n\n` +
       `📋 *Itens:*\n${itemsList}\n\n` +
       `💰 Subtotal: R$ ${subtotal.toFixed(2)}\n` +
@@ -85,7 +85,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
   };
 
   const handleCopyPix = () => {
-    navigator.clipboard.writeText('neonberry@pix.com');
+    navigator.clipboard.writeText('brownieandco@pix.com');
     setPixCopied(true);
     toast.success('Chave PIX copiada!');
     setTimeout(() => setPixCopied(false), 2000);
@@ -154,7 +154,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
                   onClick={() => setSelectedNeighborhood(n)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                     selectedNeighborhood?.id === n.id
-                      ? 'gradient-neon text-primary-foreground'
+                      ? 'gradient-chocolate text-primary-foreground'
                       : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                   }`}
                 >
@@ -175,7 +175,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
                 onClick={() => setPaymentMethod(method)}
                 className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   paymentMethod === method
-                    ? 'gradient-neon text-primary-foreground'
+                    ? 'gradient-chocolate text-primary-foreground'
                     : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                 }`}
               >
@@ -188,7 +188,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
               <p className="text-xs text-muted-foreground mb-2">Chave PIX (e-mail):</p>
               <div className="flex items-center gap-2">
                 <code className="flex-1 text-sm text-foreground bg-secondary px-3 py-2 rounded-lg font-mono">
-                  neonberry@pix.com
+                  brownieandco@pix.com
                 </code>
                 <button onClick={handleCopyPix} className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors">
                   {pixCopied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
@@ -247,7 +247,7 @@ export default function CheckoutPage({ onBack }: CheckoutPageProps) {
           )}
           <div className="border-t border-border/50 pt-2 flex justify-between">
             <span className="font-bold text-foreground">Total</span>
-            <span className="text-lg font-bold text-gradient-neon tabular-nums">R$ {total.toFixed(2)}</span>
+            <span className="text-lg font-bold text-gradient-chocolate tabular-nums">R$ {total.toFixed(2)}</span>
           </div>
         </section>
 

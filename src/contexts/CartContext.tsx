@@ -17,13 +17,13 @@ const CartContext = createContext<CartContextType | null>(null);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>(() => {
     try {
-      const stored = localStorage.getItem('neonberry-cart');
+      const stored = localStorage.getItem('brownie-cart');
       return stored ? JSON.parse(stored) : [];
     } catch { return []; }
   });
 
   useEffect(() => {
-    localStorage.setItem('neonberry-cart', JSON.stringify(items));
+    localStorage.setItem('brownie-cart', JSON.stringify(items));
   }, [items]);
 
   const addItem = useCallback((product: Product, selectedSize: ProductSize, toppings: Topping[], complements: Complement[], quantity: number, notes: string) => {
