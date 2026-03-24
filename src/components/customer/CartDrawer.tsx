@@ -53,7 +53,7 @@ export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProp
                 <div className="flex flex-col items-center justify-center h-full text-center">
                   <ShoppingBag className="w-12 h-12 text-muted-foreground/40 mb-3" />
                   <p className="text-sm text-muted-foreground">Seu carrinho está vazio</p>
-                  <p className="text-xs text-muted-foreground/60 mt-1">Adicione itens do cardápio</p>
+                  <p className="text-xs text-muted-foreground/60 mt-1">Escolha seus brownies favoritos</p>
                 </div>
               ) : (
                 <AnimatePresence>
@@ -67,8 +67,8 @@ export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProp
                       className="glass rounded-xl p-3"
                     >
                       <div className="flex gap-3">
-                        <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-2xl flex-shrink-0">
-                          🍇
+                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center text-2xl flex-shrink-0">
+                          🍫
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="text-sm font-semibold text-foreground truncate">{item.product.name}</h4>

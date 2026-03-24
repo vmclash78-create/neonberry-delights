@@ -93,7 +93,7 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
           >
             {/* Header */}
             <div className="relative h-40 bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center">
-              <span className="text-7xl">🍇</span>
+              <span className="text-7xl drop-shadow-lg">🍫</span>
               <button onClick={onClose} className="absolute top-3 right-3 p-2 rounded-full bg-card/80 backdrop-blur-sm hover:bg-card transition-colors">
                 <X className="w-5 h-5 text-foreground" />
               </button>
