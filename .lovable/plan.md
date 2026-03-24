@@ -1,123 +1,86 @@
 
-# NeonBerry Açaí — MVP Delivery System
 
-## Phase 1: Foundation & Database
+# Reformulacao Completa: E-commerce de Brownies
 
-### Visual Identity
-- Neon purple + cyan glassmorphism theme
-- Custom CSS variables: primary purple `hsl(265, 80%, 60%)`, accent cyan `hsl(180, 90%, 55%)`
-- Glassmorphism cards with `backdrop-blur`, glow effects, rounded corners (1.25rem)
-- Framer Motion micro-interactions throughout
+Transformacao total do site de acaiteria para um e-commerce profissional de brownies com identidade visual em tons de marrom, chocolate e dourado.
 
-### Database (Supabase/Lovable Cloud)
-Create all tables with proper RLS:
-- **categories** (id, name, icon, sort_order, active)
-- **products** (id, category_id, name, description, image_url, base_price, sizes JSON, is_featured, stock_control, stock_quantity, active)
-- **toppings** (id, name, price, active)
-- **complements** (id, name, price, category, max_per_product, active)
-- **neighborhoods** (id, name, delivery_fee, active)
-- **store_settings** (singleton: store name, phone, hours, logo_url, banner, colors, delivery/pickup toggles, auto_accept, social links)
-- **customers** (id, name, phone unique, created_at)
-- **favorites** (id, customer_phone, product_id)
-- **coupons** (id, code, type percent/fixed, value, active, expires_at)
-- **orders** (id, customer_name, customer_phone, items JSON, subtotal, delivery_fee, discount_value, coupon_id, total, address, neighborhood_id, payment_method, status, notes, created_at)
-- **order_status_logs** (id, order_id, status, created_at)
-- **analytics_events** (id, type, payload JSONB, created_at)
+---
 
-Seed sample data: 4 categories, ~12 açaí products, toppings, complements, sample neighborhoods.
+## O que muda
 
-### RLS
-- SELECT public on all tables
-- INSERT public on orders, customers, analytics_events, favorites
-- Admin (authenticated) for everything else
+### 1. Identidade Visual — Paleta Chocolate Premium
+Substituir toda a paleta neon roxo/ciano por tons quentes de brownie:
+- **Primary**: Marrom chocolate escuro `hsl(25, 55%, 30%)`
+- **Accent**: Dourado caramelo `hsl(35, 80%, 55%)`
+- **Background light**: Creme `hsl(30, 30%, 96%)`
+- **Background dark**: Chocolate intenso `hsl(25, 30%, 8%)`
+- Remover efeitos neon/glow, substituir por sombras quentes e suaves
+- Gradientes: chocolate escuro → caramelo dourado
+- Manter glassmorphism com tons quentes
+- Atualizar `src/index.css` (todas as CSS variables) e `tailwind.config.ts`
 
-### Realtime
-- Enable on orders, products, store_settings
+### 2. Dados dos Produtos — Brownies
+Reescrever `src/data/mock-data.ts` completamente:
+- **Categorias**: Brownies Classicos, Brownies Premium, Brownies Recheados, Combos
+- **~12 Produtos**: Brownie Tradicional, Brownie Nutella, Brownie Red Velvet, Brownie Pistache, etc. com tamanhos (Individual, Medio, Grande) em vez de ml
+- **Toppings**: Cobertura de chocolate, Sorvete, Chantilly, Calda de caramelo, etc.
+- **Complements**: Nozes, Castanhas, M&Ms, Frutas vermelhas
+- **Store Settings**: Nome "Brownie & Co." com cores atualizadas, WhatsApp, PIX
+- Emoji de grape 🍇 → 🍫 em todo o codigo
 
-## Phase 2: Customer Homepage (iFood-style)
+### 3. Tipos — Ajuste ProductSize
+Em `src/types/index.ts`, renomear campo `ml` para `weight` (gramas) no `ProductSize`, pois brownies usam peso, nao volume.
 
-### Layout
-- Mobile-first bottom navigation (Home, Menu, Cart, Favorites)
-- Sticky header with store logo + search bar
+### 4. Componentes do Cliente
+Todos os arquivos em `src/components/customer/`:
+- **Hero.tsx**: Texto "O melhor brownie artesanal da cidade", CTA "Peca seu Brownie", remover referencias a acai
+- **Header.tsx**: Logo "Brownie & Co.", placeholder de busca adaptado
+- **ProductGrid.tsx**: Emoji 🍫, remover texto "Destaque" por badge marrom
+- **ProductModal.tsx**: Emoji 🍫, labels "Tamanho" com gramas em vez de ml, texto adaptado
+- **CartDrawer.tsx**: Emoji 🍫, textos adaptados
+- **CheckoutPage.tsx**: Mensagem WhatsApp com "Pedido Brownie & Co.", PIX key atualizada
+- **FeaturedCarousel.tsx**: Adaptar visual
+- **CategoryChips.tsx**: Sem mudanca estrutural (dados vem do mock)
+- **BottomNav.tsx**: Manter estrutura, possivelmente ajustar icones
 
-### Hero Section
-- Dynamic banner from store_settings
-- Parallax effect, animated entry
-- Glow CTA button "Peça Agora"
+### 5. Admin — Textos e Visual
+- **AdminLogin.tsx**: Nome "Brownie & Co. Admin"
+- **AdminDashboard.tsx**: Titulo adaptado
+- **AdminSidebar.tsx**: Logo adaptado
+- **AdminSettings.tsx**: Valores default brownie
+- Demais admin: mudancas minimas (dados vem do mock)
 
-### Sections
-- **Search**: Debounced instant search with highlighted results
-- **Categories**: Horizontal scrollable chips with icons
-- **Featured Products**: Carousel with `is_featured` products
-- **Promotions**: Dynamic banner pulled from store
-- **Full Menu**: Grid by category, skeleton loading on all lists
-- **Favorites**: Heart icon toggle, persisted by phone number
+### 6. Contextos
+- **CartContext.tsx**: Mudar localStorage key de `neonberry-cart` para `brownie-cart`
+- **StoreContext.tsx**: Sem mudanca estrutural (puxa do mock)
 
-### Product Modal
-- Smooth slide-up transition
-- Size selector, toppings multi-select, complements with limits
-- Real-time price calculation
-- Add to cart with toast feedback
+### 7. Imagens Placeholder
+Usar emojis tematicos (🍫🍪🎂) como placeholder visual nos cards e modais, com gradientes chocolate em vez de roxo/ciano.
 
-## Phase 3: Cart & Checkout
+### 8. CSS Utilities
+Renomear/atualizar em `src/index.css`:
+- `.neon-glow` → `.warm-glow` com sombra marrom/dourada
+- `.gradient-neon` → `.gradient-chocolate` (marrom escuro → caramelo)
+- `.text-gradient-neon` → `.text-gradient-chocolate`
+- `.cyan-glow` → `.caramel-glow`
 
-### Cart (Slide-over panel)
-- Persisted in localStorage
-- Animated item add/remove
-- Quantity controls, item editing
-- Real-time total calculation
-- Coupon code input with validation
+---
 
-### Checkout Page
-- Customer info: name, phone (masked), address
-- Neighborhood selector (auto delivery fee)
-- Payment method: PIX or cash
-- PIX: show copy-paste code area
-- Order summary with discount applied
-- **WhatsApp button**: Generates formatted message with full order details, sends to store's WhatsApp number
-- Store closed detection: blocks checkout with friendly message
+## Arquivos Modificados (resumo)
+| Arquivo | Tipo de Mudanca |
+|---|---|
+| `src/index.css` | Paleta completa + utilities |
+| `tailwind.config.ts` | Keyframes/animacoes com novas cores |
+| `src/data/mock-data.ts` | Reescrita total (brownies) |
+| `src/types/index.ts` | `ml` → `weight` no ProductSize |
+| `src/components/customer/*` | Textos, emojis, classes CSS |
+| `src/components/admin/*` | Textos e branding |
+| `src/contexts/CartContext.tsx` | localStorage key |
+| `src/hooks/useProducts.ts` | Sem mudanca |
+| `src/hooks/useCheckout.ts` | Sem mudanca |
 
-## Phase 4: Admin Panel
+---
 
-### Auth
-- Email/password login via Supabase Auth
-- Protected `/admin` routes
+## Resultado Esperado
+Um e-commerce elegante e profissional de brownies artesanais, com visual quente em tons de chocolate e caramelo, experiencia mobile-first estilo iFood, mantendo toda a funcionalidade existente (carrinho, checkout WhatsApp, PIX, admin).
 
-### Dashboard
-- Today's sales, order count, average ticket
-- Recharts line/bar charts for weekly trends
-- Top products ranking
-
-### Orders Management (Real-time)
-- Live order feed with sound notification on new orders
-- Status pipeline: Novo → Preparando → Saiu para Entrega → Entregue
-- Status change logs
-
-### Product Management
-- CRUD with image upload (placeholder URLs for now)
-- Stock control toggle + quantity
-- Featured toggle
-- Category assignment
-
-### Coupon Management
-- CRUD: code, type, value, expiration, active toggle
-
-### Store Settings
-- Edit all store_settings fields
-- Color pickers for theme
-- Toggle delivery/pickup
-- Social media links
-
-### Analytics (Basic)
-- View counts, cart adds, orders from analytics_events table
-- Simple conversion funnel
-
-## Tech Stack
-- React + TypeScript + Vite
-- Tailwind CSS + shadcn/ui
-- Framer Motion for animations
-- React Query for data fetching + cache
-- Supabase (Lovable Cloud) for DB + Auth + Realtime
-- Recharts for admin charts
-- Sonner for toasts
-- Lucide icons
