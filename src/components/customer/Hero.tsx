@@ -28,7 +28,7 @@ export default function Hero({ onCtaClick }: HeroProps) {
             <Cookie className="w-3 h-3" /> Artesanal & Gourmet
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-[1.1] tracking-tight mb-3" style={{ textWrap: 'balance' }}>
-            {settings.name}
+            {settings?.store_name || 'Brownie & Co.'}
           </h2>
           <p className="text-white/75 text-sm md:text-base max-w-md mb-6">
             O melhor brownie artesanal da cidade, feito com ingredientes nobres. Peça agora e receba quentinho.

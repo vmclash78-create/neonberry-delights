@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import { Product } from '@/types';
+import { DbProduct } from '@/hooks/useProducts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Star } from 'lucide-react';
 
 interface ProductCardProps {
-  product: Product;
-  onClick: (product: Product) => void;
+  product: DbProduct;
+  onClick: (product: DbProduct) => void;
   index: number;
 }
 
@@ -50,9 +50,9 @@ function ProductCard({ product, onClick, index }: ProductCardProps) {
 }
 
 interface ProductGridProps {
-  products: Product[];
+  products: DbProduct[];
   isLoading: boolean;
-  onProductClick: (product: Product) => void;
+  onProductClick: (product: DbProduct) => void;
 }
 
 export default function ProductGrid({ products, isLoading, onProductClick }: ProductGridProps) {
