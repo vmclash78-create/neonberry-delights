@@ -24,7 +24,7 @@ export default function Header({ searchQuery, onSearchChange }: HeaderProps) {
               B
             </div>
             <div>
-              <h1 className="text-lg font-bold tracking-tight text-foreground">{settings.name}</h1>
+              <h1 className="text-lg font-bold tracking-tight text-foreground">{settings?.store_name || 'Brownie & Co.'}</h1>
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <MapPin className="w-3 h-3" />
                 <span>Delivery & Retirada</span>

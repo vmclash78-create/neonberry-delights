@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion';
-import { Product } from '@/types';
+import { DbProduct } from '@/hooks/useProducts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ChevronRight } from 'lucide-react';
 
 interface FeaturedCarouselProps {
-  products: Product[];
+  products: DbProduct[];
   isLoading: boolean;
-  onProductClick: (product: Product) => void;
+  onProductClick: (product: DbProduct) => void;
 }
 
 export default function FeaturedCarousel({ products, isLoading, onProductClick }: FeaturedCarouselProps) {
