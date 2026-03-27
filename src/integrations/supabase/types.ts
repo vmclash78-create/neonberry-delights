@@ -14,7 +14,173 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      order_items: {
+        Row: {
+          details: string
+          id: string
+          name: string
+          order_id: string
+          price: number
+          product_id: string | null
+          quantity: number
+        }
+        Insert: {
+          details?: string
+          id?: string
+          name: string
+          order_id: string
+          price?: number
+          product_id?: string | null
+          quantity?: number
+        }
+        Update: {
+          details?: string
+          id?: string
+          name?: string
+          order_id?: string
+          price?: number
+          product_id?: string | null
+          quantity?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          customer_address: string
+          customer_name: string
+          customer_phone: string
+          delivery_fee: number
+          discount_value: number
+          id: string
+          notes: string
+          payment_method: string
+          status: string
+          subtotal: number
+          total: number
+        }
+        Insert: {
+          created_at?: string
+          customer_address?: string
+          customer_name: string
+          customer_phone: string
+          delivery_fee?: number
+          discount_value?: number
+          id?: string
+          notes?: string
+          payment_method?: string
+          status?: string
+          subtotal?: number
+          total?: number
+        }
+        Update: {
+          created_at?: string
+          customer_address?: string
+          customer_name?: string
+          customer_phone?: string
+          delivery_fee?: number
+          discount_value?: number
+          id?: string
+          notes?: string
+          payment_method?: string
+          status?: string
+          subtotal?: number
+          total?: number
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          active: boolean
+          category: string
+          created_at: string
+          description: string
+          id: string
+          image_url: string
+          is_featured: boolean
+          name: string
+          price: number
+          sizes: Json
+        }
+        Insert: {
+          active?: boolean
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          is_featured?: boolean
+          name: string
+          price?: number
+          sizes?: Json
+        }
+        Update: {
+          active?: boolean
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          is_featured?: boolean
+          name?: string
+          price?: number
+          sizes?: Json
+        }
+        Relationships: []
+      }
+      store_settings: {
+        Row: {
+          allow_pix: boolean
+          allow_whatsapp: boolean
+          closing_time: string
+          delivery_enabled: boolean
+          id: string
+          instagram: string
+          min_order_value: number
+          opening_time: string
+          pickup_enabled: boolean
+          pix_key: string
+          store_name: string
+          whatsapp_number: string
+        }
+        Insert: {
+          allow_pix?: boolean
+          allow_whatsapp?: boolean
+          closing_time?: string
+          delivery_enabled?: boolean
+          id?: string
+          instagram?: string
+          min_order_value?: number
+          opening_time?: string
+          pickup_enabled?: boolean
+          pix_key?: string
+          store_name?: string
+          whatsapp_number?: string
+        }
+        Update: {
+          allow_pix?: boolean
+          allow_whatsapp?: boolean
+          closing_time?: string
+          delivery_enabled?: boolean
+          id?: string
+          instagram?: string
+          min_order_value?: number
+          opening_time?: string
+          pickup_enabled?: boolean
+          pix_key?: string
+          store_name?: string
+          whatsapp_number?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
