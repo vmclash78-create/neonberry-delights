@@ -1,10 +1,28 @@
 import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { CartItem, Product, ProductSize, Topping, Complement } from '@/types';
+import { DbProduct } from '@/hooks/useProducts';
 import { toast } from 'sonner';
+
+interface CartItemSize {
+  name: string;
+  weight: number;
+  price: number;
+}
+
+export interface CartItem {
+  id: string;
+  product: DbProduct;
+  selectedSize: CartItemSize;
+  quantity: number;
+  notes: string;
+  unitPrice: number;
+  totalPrice: number;
+  toppings: { name: string }[];
+  complements: { name: string }[];
+}
 
 interface CartContextType {
   items: CartItem[];
-  addItem: (product: Product, size: ProductSize, toppings: Topping[], complements: Complement[], quantity: number, notes: string) => void;
+  addItem: (product: DbProduct, size: CartItemSize, quantity: number, notes: string) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -26,16 +44,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('brownie-cart', JSON.stringify(items));
   }, [items]);
 
-  const addItem = useCallback((product: Product, selectedSize: ProductSize, toppings: Topping[], complements: Complement[], quantity: number, notes: string) => {
-    const toppingsTotal = toppings.reduce((s, t) => s + t.price, 0);
-    const complementsTotal = complements.reduce((s, c) => s + c.price, 0);
-    const unitPrice = selectedSize.price + toppingsTotal + complementsTotal;
-    
+  const addItem = useCallback((product: DbProduct, selectedSize: CartItemSize, quantity: number, notes: string) => {
+    const unitPrice = selectedSize.price;
     const newItem: CartItem = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-      product, selectedSize, toppings, complements, quantity, notes,
+      product, selectedSize, quantity, notes,
       unitPrice,
       totalPrice: unitPrice * quantity,
+      toppings: [],
+      complements: [],
     };
     setItems(prev => [...prev, newItem]);
     toast.success(`${product.name} adicionado ao carrinho!`);

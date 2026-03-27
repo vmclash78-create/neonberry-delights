@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
-import { Product } from '@/types';
+import { DbProduct } from '@/hooks/useProducts';
 import { useCategories, useFeaturedProducts, useProductsByCategory } from '@/hooks/useProducts';
 import Header from '@/components/customer/Header';
 import Hero from '@/components/customer/Hero';
@@ -18,7 +18,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<'home' | 'menu' | 'cart' | 'favorites'>('home');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<DbProduct | null>(null);
   const [cartOpen, setCartOpen] = useState(false);
 
   const { data: categories, isLoading: catLoading } = useCategories();
