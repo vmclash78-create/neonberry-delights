@@ -1,31 +1,24 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Product, ProductSize, Topping, Complement } from '@/types';
-import { useToppings, useComplements } from '@/hooks/useProducts';
+import { DbProduct } from '@/hooks/useProducts';
 import { useCart } from '@/contexts/CartContext';
 import { X, Minus, Plus, ShoppingCart } from 'lucide-react';
 
 interface ProductModalProps {
-  product: Product | null;
+  product: DbProduct | null;
   onClose: () => void;
 }
 
 export default function ProductModal({ product, onClose }: ProductModalProps) {
   const { addItem } = useCart();
-  const { data: toppings } = useToppings();
-  const { data: complements } = useComplements();
 
-  const [selectedSize, setSelectedSize] = useState<ProductSize | null>(null);
-  const [selectedToppings, setSelectedToppings] = useState<Topping[]>([]);
-  const [selectedComplements, setSelectedComplements] = useState<Complement[]>([]);
+  const [selectedSize, setSelectedSize] = useState<{ name: string; weight: number; price: number } | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [notes, setNotes] = useState('');
 
   useMemo(() => {
     if (product) {
       setSelectedSize(product.sizes[0] || null);
-      setSelectedToppings([]);
-      setSelectedComplements([]);
       setQuantity(1);
       setNotes('');
     }
@@ -33,44 +26,14 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
 
   const totalPrice = useMemo(() => {
     if (!selectedSize) return 0;
-    const toppingsCost = selectedToppings.reduce((s, t) => s + t.price, 0);
-    const complementsCost = selectedComplements.reduce((s, c) => s + c.price, 0);
-    return (selectedSize.price + toppingsCost + complementsCost) * quantity;
-  }, [selectedSize, selectedToppings, selectedComplements, quantity]);
-
-  const toggleTopping = (topping: Topping) => {
-    setSelectedToppings(prev =>
-      prev.find(t => t.id === topping.id)
-        ? prev.filter(t => t.id !== topping.id)
-        : [...prev, topping]
-    );
-  };
-
-  const toggleComplement = (complement: Complement) => {
-    setSelectedComplements(prev => {
-      if (prev.find(c => c.id === complement.id)) {
-        return prev.filter(c => c.id !== complement.id);
-      }
-      const categoryCount = prev.filter(c => c.category === complement.category).length;
-      if (categoryCount >= complement.max_per_product) return prev;
-      return [...prev, complement];
-    });
-  };
+    return selectedSize.price * quantity;
+  }, [selectedSize, quantity]);
 
   const handleAdd = () => {
     if (!product || !selectedSize) return;
-    addItem(product, selectedSize, selectedToppings, selectedComplements, quantity, notes);
+    addItem(product, selectedSize, quantity, notes);
     onClose();
   };
-
-  const complementsByCategory = useMemo(() => {
-    const map: Record<string, Complement[]> = {};
-    (complements || []).forEach(c => {
-      if (!map[c.category]) map[c.category] = [];
-      map[c.category].push(c);
-    });
-    return map;
-  }, [complements]);
 
   return (
     <AnimatePresence>
@@ -90,7 +53,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
             onClick={e => e.stopPropagation()}
             className="bg-card w-full max-w-lg max-h-[90vh] rounded-t-3xl md:rounded-3xl overflow-hidden flex flex-col"
           >
-            {/* Header */}
             <div className="relative h-40 bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center overflow-hidden">
               {product.image_url ? (
                 <img src={product.image_url} alt={product.name} className="absolute inset-0 w-full h-full object-cover" />
@@ -102,14 +64,12 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
               </button>
             </div>
 
-            {/* Content */}
             <div className="flex-1 overflow-y-auto p-5 space-y-5">
               <div>
                 <h2 className="text-xl font-bold text-foreground mb-1">{product.name}</h2>
                 <p className="text-sm text-muted-foreground">{product.description}</p>
               </div>
 
-              {/* Sizes */}
               <div>
                 <h3 className="text-sm font-semibold text-foreground mb-2">Tamanho</h3>
                 <div className="flex gap-2 flex-wrap">
@@ -129,60 +89,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
                 </div>
               </div>
 
-              {/* Toppings */}
-              {toppings && toppings.length > 0 && (
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground mb-2">Coberturas</h3>
-                  <div className="grid grid-cols-2 gap-2">
-                    {toppings.map(topping => {
-                      const isSelected = selectedToppings.some(t => t.id === topping.id);
-                      return (
-                        <button
-                          key={topping.id}
-                          onClick={() => toggleTopping(topping)}
-                          className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
-                            isSelected
-                              ? 'bg-primary/15 border-2 border-primary text-foreground'
-                              : 'bg-secondary text-secondary-foreground border-2 border-transparent hover:bg-secondary/80'
-                          }`}
-                        >
-                          <span>{topping.name}</span>
-                          <span className="tabular-nums">+R$ {topping.price.toFixed(2)}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* Complements */}
-              {Object.entries(complementsByCategory).map(([category, items]) => (
-                <div key={category}>
-                  <h3 className="text-sm font-semibold text-foreground mb-1">{category}</h3>
-                  <p className="text-[11px] text-muted-foreground mb-2">Máx. {items[0]?.max_per_product} por pedido</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {items.map(comp => {
-                      const isSelected = selectedComplements.some(c => c.id === comp.id);
-                      return (
-                        <button
-                          key={comp.id}
-                          onClick={() => toggleComplement(comp)}
-                          className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
-                            isSelected
-                              ? 'bg-accent/15 border-2 border-accent text-foreground'
-                              : 'bg-secondary text-secondary-foreground border-2 border-transparent hover:bg-secondary/80'
-                          }`}
-                        >
-                          <span>{comp.name}</span>
-                          <span className="tabular-nums">+R$ {comp.price.toFixed(2)}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-
-              {/* Notes */}
               <div>
                 <h3 className="text-sm font-semibold text-foreground mb-2">Observações</h3>
                 <textarea
@@ -194,7 +100,6 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
               </div>
             </div>
 
-            {/* Footer */}
             <div className="p-4 border-t border-border/50 glass-strong">
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 bg-secondary rounded-xl px-2">
